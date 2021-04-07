@@ -36,16 +36,41 @@ function initVue(){
   new Vue({
    el:'#app',
    data:{
+     "currentImg":0,
+     "arrayImg": [
+       "https://cdn.mos.cms.futurecdn.net/FUE7XiFApEqWZQ85wYcAfM.jpg",
+       "https://static.photocdn.pt/images/articles/2017/04/28/iStock-546424192.jpg",
+       "https://static.photocdn.pt/images/articles/2017/04/28/iStock-646511634.jpg",
+       "https://images.pexels.com/photos/371633/pexels-photo-371633.jpeg?cs=srgb&dl=clouds-country-daylight-371633.jpg&fm=jpg",
+       "https://cdn.mos.cms.futurecdn.net/FUE7XiFApEqWZQ85wYcAfM.jpg",
+       "https://static.photocdn.pt/images/articles/2017/04/28/iStock-546424192.jpg"
+   ],
      "nextImg": "next",
-     "prevImg": "prev"
+     "prevImg": "prev",
+     "timer":null,
    },
    methods:{
     go_next: function(){
+      this.currentImg++;
+      if(this.currentImg>= this.arrayImg.length){
+        this.currentImg=0;
+      }
      console.log('go next');
     },
     go_prev: function(){
+      this.currentImg--;
+      if(this.currentImg < 0){
+        this.currentImg= this.arrayImg.length - 1;
+      }
      console.log('go prev');
     },
+    intervalCounter: function () {
+      if(this.timer == null){
+        this.timer = setInterval(this.go_next,3000);
+      }
+    },
+
+
    },
   });
 }
